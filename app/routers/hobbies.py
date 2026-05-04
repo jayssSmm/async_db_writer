@@ -10,7 +10,7 @@ async def home(request: Request):
     return templates.TemplateResponse(
         request,             
         "index.html",
-        {"request": request}
+        {"request": request},
     )
 
 @router.post('/submit')
@@ -19,7 +19,9 @@ async def submit(request: Request):
 
     name = data.get('name')
     message = data.get('message')
-
-    insert_db.delay(name, message)
-
+    
+    if name and message:
+        insert_db.delay(name, message)
+        return {"status":"failed"}
+    
     return {"status":"ok"}

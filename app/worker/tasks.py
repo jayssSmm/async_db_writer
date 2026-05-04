@@ -9,7 +9,8 @@ def insert_db(name, hobbies):
         db.add(Hobby(name=name, hobby=hobbies))
         db.commit()
     except Exception as e:
+        print(e)
         db.rollback()
-        raise
+        raise 
     finally:
         db.close()

@@ -20,7 +20,7 @@ redis_client = redis.from_url(REDIS_URL, decode_responses=True)
 celery_app = Celery(
     "extensions",
     broker = REDIS_URL,
-    backend = REDIS_URL,
+    backend = None,
 ) 
 
 engine = create_engine(DATABASE_URL)
@@ -30,3 +30,5 @@ SessionLocal = sessionmaker(
     autoflush=False,
     bind=engine
 )
+
+celery_app.conf.task_ignore_result = True
