@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Request
 from app.extension import templates
+from app.worker.tasks import insert_db
 
 router = APIRouter()
 
@@ -19,6 +20,6 @@ async def submit(request: Request):
     name = data.get('name')
     message = data.get('message')
 
-
+    insert_db.delay(name, message)
 
     return {"status":"ok"}
