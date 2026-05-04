@@ -1,5 +1,3 @@
-let name = document.getElementById('name').value
-let hobbies = document.getElementById('message').value
 
 async function send(name, hobbies) {
 
@@ -13,14 +11,18 @@ async function send(name, hobbies) {
             message: hobbies,
         })
     })
-
+    document.getElementById('name').value = ''
+    document.getElementById('message').value = ''
+    
     const resMessage =  await res.json()
 }
 
-document.getElementById('form').addEventListener('submit', (e) =>{
+document.getElementById('submit').addEventListener('click', (e) =>{
     e.preventDefault()
+    name = document.getElementById('name').value 
+    message = document.getElementById('message').value
     
-    send(name, hobbies).catch(err => {
+    send(name, message).catch(err => {
         console.log("Error:",err)
     })
 })  

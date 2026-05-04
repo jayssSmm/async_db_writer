@@ -2,3 +2,6 @@ uvicorn
 dotenv
 fastapi
 jinja2
+redis
+celery
+sqlalchemy
